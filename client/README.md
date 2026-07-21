@@ -1,32 +1,61 @@
-# React + TypeScript + Vite
+# AutoMate — AI-Powered Car & Bike Marketplace
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+AutoMate is a full-stack automobile marketplace platform that combines a traditional buy/sell marketplace with AI/ML-powered features — price prediction, personalized recommendations, and a RAG-based conversational assistant.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **User Authentication** — JWT-based register/login
+- **Vehicle Marketplace** — list, browse, search, and filter cars/bikes
+- **Image Upload** — multi-image vehicle listings
+- **Vehicle Comparison** — side-by-side spec comparison
+- **Vehicle Detail Page** with **EMI Calculator**
+- **Live Car News Feed** — real-time automotive news via GNews API
+- **AI Price Prediction** — ML regression model estimates fair market price
+- **AI Recommendation Engine** — content-based similarity to suggest comparable vehicles
+- **RAG-based AI Chatbot** — natural language Q&A over live vehicle listings using LangChain + Groq + FAISS
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+**Frontend:** React, TypeScript, Tailwind CSS, React Router, Axios
+**Backend:** Node.js, Express, Sequelize, PostgreSQL (Neon), Multer, JWT
+**ML Service:** Python, FastAPI, scikit-learn, LangChain, Groq (Llama 3), FAISS, HuggingFace Embeddings
 
-## Expanding the Oxlint configuration
+## Architecture
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+The project follows a microservice architecture with three independently running services:
+## AI/ML Components
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+1. **Price Prediction** — RandomForestRegressor trained on vehicle specs (brand, year, km driven, fuel type, transmission) to estimate fair resale value.
+2. **Recommendation Engine** — Content-based filtering using cosine similarity across encoded vehicle features.
+3. **RAG Chatbot** — Vehicle listings are embedded (sentence-transformers) and stored in a FAISS vector store; user queries are answered by an LLM (Groq/Llama 3) grounded in retrieved listings.
+
+## Local Setup
+
+### Backend
+```bash
+cd server
+npm install
+npm run dev
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+### Frontend
+```bash
+cd client
+npm install
+npm run dev
+```
+
+### ML Service
+```bash
+cd ml-service
+python -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
+uvicorn main:app --reload --port 8000
+```
+
+Each service requires its own `.env` file with the necessary credentials (database URL, JWT secret, Groq API key, GNews API key).
+
+## Author
+
+Shivansh — Final Year B.Tech CSE (AI/ML), G.L. Bajaj Institute of Technology and Management
