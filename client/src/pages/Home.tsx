@@ -3,6 +3,9 @@ import axios from 'axios';
 import axiosInstance from '../api/axiosInstance';
 import { Link } from 'react-router-dom';
 
+const BACKEND_URL = 'https://sunny-celebration-production-3859.up.railway.app';
+const RECOMMENDATION_URL = 'http://localhost:8000'; // Replace with deployed ML service URL when live
+
 interface Vehicle {
   id: number;
   type: string;
@@ -79,13 +82,12 @@ function Home() {
   };
 
   const showSimilar = async (e: React.MouseEvent, vehicle: Vehicle) => {
-    // Prevent navigating to vehicle details page when clicking "Show Similar Vehicles"
     e.preventDefault();
     e.stopPropagation();
 
     setSelectedId(vehicle.id);
     try {
-      const res = await axios.post('http://localhost:8000/recommend', {
+      const res = await axios.post(`${RECOMMENDATION_URL}/recommend`, {
         vehicles: vehicles.map((v) => ({
           id: v.id,
           brand: v.brand,
@@ -172,8 +174,8 @@ function Home() {
             >
               {v.images && v.images.length > 0 ? (
                 <img
-                  src={`http://localhost:5000${v.images[0]}`}
-                  alt={v.brand + ' ' + v.model}
+                  src={`${BACKEND_URL}${v.images[0]}`}
+                  alt={`${v.brand} ${v.model}`}
                   className="w-full h-44 object-cover"
                 />
               ) : (
@@ -219,28 +221,26 @@ function Home() {
         {!newsLoading && news.length === 0 && <p className="text-gray-500">No news available right now.</p>}
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {news.map((article, i) => {
-            return (
-              <a
-                key={i}
-                href={article.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-white rounded-2xl shadow-sm hover:shadow-lg transition overflow-hidden border border-gray-100 block"
-              >
-                {article.image ? (
-                  <img src={article.image} alt={article.title} className="w-full h-40 object-cover" />
-                ) : (
-                  <div className="w-full h-40 bg-gray-100" />
-                )}
-                <div className="p-4">
-                  <p className="text-xs text-primary font-medium mb-1">{article.source?.name} - {formatDate(article.publishedAt)}</p>
-                  <h3 className="font-semibold text-dark text-sm leading-snug">{article.title}</h3>
-                  <p className="text-gray-500 text-xs mt-2">{article.description}</p>
-                </div>
-              </a>
-            );
-          })}
+          {news.map((article, i) => (
+            <a
+              key={i}
+              href={article.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-white rounded-2xl shadow-sm hover:shadow-lg transition overflow-hidden border border-gray-100 block"
+            >
+              {article.image ? (
+                <img src={article.image} alt={article.title} className="w-full h-40 object-cover" />
+              ) : (
+                <div className="w-full h-40 bg-gray-100" />
+              )}
+              <div className="p-4">
+                <p className="text-xs text-primary font-medium mb-1">{article.source?.name} - {formatDate(article.publishedAt)}</p>
+                <h3 className="font-semibold text-dark text-sm leading-snug">{article.title}</h3>
+                <p className="text-gray-500 text-xs mt-2">{article.description}</p>
+              </div>
+            </a>
+          ))}
         </div>
       </div>
     </div>

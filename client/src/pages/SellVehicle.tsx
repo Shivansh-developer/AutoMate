@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import axios from 'axios';
 
+const BACKEND_URL = 'https://sunny-celebration-production-3859.up.railway.app';
+
 function SellVehicle() {
   const [form, setForm] = useState({
     type: 'car', brand: 'Honda', model: '', year: 2022, price: '',
@@ -44,7 +46,7 @@ function SellVehicle() {
       Object.entries(form).forEach(([key, value]) => formData.append(key, String(value)));
       if (images) Array.from(images).forEach((file) => formData.append('images', file));
 
-      const res = await axios.post('http://localhost:5000/api/vehicles', formData, {
+      const res = await axios.post(`${BACKEND_URL}/api/vehicles`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
       setMessage(res.data.message);

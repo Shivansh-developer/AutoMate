@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axiosInstance from '../api/axiosInstance';
 
+const BACKEND_URL = 'https://sunny-celebration-production-3859.up.railway.app';
+
 interface Vehicle {
   id: number;
   type: string;
@@ -55,7 +57,7 @@ function VehicleDetail() {
         <div className="bg-white rounded-2xl shadow-sm overflow-hidden mb-8">
           {vehicle.images && vehicle.images.length > 0 ? (
             <img
-              src={`http://localhost:5000${vehicle.images[0]}`}
+              src={`${BACKEND_URL}${vehicle.images[0]}`}
               alt={vehicle.brand + ' ' + vehicle.model}
               className="w-full h-80 object-cover"
             />
