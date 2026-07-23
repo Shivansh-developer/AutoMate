@@ -75,16 +75,21 @@ function Catalog() {
             <div
               key={car.id}
               onClick={() => setSelectedCar(car)}
-              className="bg-white rounded-2xl shadow-sm hover:shadow-lg transition p-5 cursor-pointer border border-gray-100"
+              className="bg-white rounded-2xl shadow-sm hover:shadow-lg transition overflow-hidden cursor-pointer border border-gray-100"
             >
-              <span className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full">{car.category}</span>
-              <h3 className="text-lg font-semibold text-dark mt-2">{car.brand} {car.model}</h3>
-              <p className="text-primary font-bold text-lg mt-1">
-                Rs {car.priceMin} - {car.priceMax} Lakh
-              </p>
-              <div className="text-sm text-gray-500 mt-2 space-y-1">
-                <p>Fuel: {car.fuelTypes}</p>
-                <p>Mileage: {car.mileage}</p>
+              <div className="w-full h-36 bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center text-5xl">
+                🚗
+              </div>
+              <div className="p-5">
+                <span className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full">{car.category}</span>
+                <h3 className="text-lg font-semibold text-dark mt-2">{car.brand} {car.model}</h3>
+                <p className="text-primary font-bold text-lg mt-1">
+                  Rs {car.priceMin} - {car.priceMax} Lakh
+                </p>
+                <div className="text-sm text-gray-500 mt-2 space-y-1">
+                  <p>Fuel: {car.fuelTypes}</p>
+                  <p>Mileage: {car.mileage}</p>
+                </div>
               </div>
             </div>
           ))}
@@ -99,6 +104,9 @@ function Catalog() {
               className="bg-white rounded-2xl p-6 max-w-md w-full"
               onClick={(e) => e.stopPropagation()}
             >
+              <div className="w-full h-40 bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl flex items-center justify-center text-6xl mb-4">
+                🚗
+              </div>
               <h2 className="text-xl font-bold text-dark mb-1">{selectedCar.brand} {selectedCar.model}</h2>
               <p className="text-primary font-bold text-2xl mb-4">
                 Rs {selectedCar.priceMin} - {selectedCar.priceMax} Lakh
