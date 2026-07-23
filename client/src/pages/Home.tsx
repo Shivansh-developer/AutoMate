@@ -114,6 +114,13 @@ function Home() {
     });
   };
 
+  const getImageUrl = (imagePath: string) => {
+    if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
+      return imagePath;
+    }
+    return `${BACKEND_URL}${imagePath}`;
+  };
+
   return (
     <div className="min-h-screen">
       <div className="bg-dark text-white py-16 px-6 text-center">
@@ -174,7 +181,7 @@ function Home() {
             >
               {v.images && v.images.length > 0 ? (
                 <img
-                  src={`${BACKEND_URL}${v.images[0]}`}
+                  src={getImageUrl(v.images[0])}
                   alt={`${v.brand} ${v.model}`}
                   className="w-full h-44 object-cover"
                 />

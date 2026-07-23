@@ -4,7 +4,7 @@ const { Op } = require('sequelize');
 const createVehicle = async (req, res) => {
   try {
     const { type, brand, model, year, price, fuelType, kmDriven, transmission } = req.body;
-    const imagePaths = req.files ? req.files.map((file) => `/uploads/${file.filename}`) : [];
+    const imagePaths = req.files ? req.files.map((file) => file.path) : [];
 
     const vehicle = await Vehicle.create({
       type, brand, model, year, price, fuelType, kmDriven, transmission,

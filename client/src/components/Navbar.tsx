@@ -9,6 +9,7 @@ function Navbar() {
         </Link>
         <div className="flex items-center gap-6 text-sm font-medium">
           <Link to="/" className="hover:text-primary transition">Home</Link>
+          <Link to="/catalog" className="hover:text-primary transition">New Cars</Link>
           <Link to="/compare" className="hover:text-primary transition">Compare</Link>
           <Link to="/sell" className="hover:text-primary transition">Sell</Link>
           <Link to="/chat" className="hover:text-primary transition">🤖 AI Assistant</Link>

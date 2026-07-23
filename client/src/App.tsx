@@ -7,6 +7,7 @@ import Compare from './pages/Compare';
 import SellVehicle from './pages/SellVehicle';
 import Chatbot from './pages/Chatbot';
 import VehicleDetail from './pages/VehicleDetail';
+import Catalog from './pages/Catalog';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/sell" element={<SellVehicle />} />
         <Route path="/chat" element={<Chatbot />} />
         <Route path="/vehicle/:id" element={<VehicleDetail />} />
+        <Route path="/catalog" element={<Catalog />} />
       </Routes>
     </BrowserRouter>
   );
