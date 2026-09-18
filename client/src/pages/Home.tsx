@@ -3,7 +3,7 @@ import axios from 'axios';
 import axiosInstance from '../api/axiosInstance';
 import { Link } from 'react-router-dom';
 
-const BACKEND_URL = 'https://sunny-celebration-production-3859.up.railway.app';
+const BACKEND_URL = 'https://automate-4n8b.onrender.com';
 const RECOMMENDATION_URL = 'http://localhost:8000'; // Replace with deployed ML service URL when live
 
 interface Vehicle {
